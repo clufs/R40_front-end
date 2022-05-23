@@ -1,0 +1,25 @@
+
+
+
+.login__screen{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--jet-color);
+}
+
+.login__container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: var(--light-gray-color);
+  -webkit-box-shadow: 2px 4px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 4px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 2px 4px 5px 0px rgba(0,0,0,0.75);
+}
+
+
+
