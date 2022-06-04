@@ -7,16 +7,20 @@ import { PublicRoutesProps } from './Interfaces';
 import { PrincipalRouter } from './PrincipalRouter';
 
 import './AppRouter.css'
+import { startGetAllClients } from '../features/clients/clients.slice';
+import { startGetAllOrders } from '../features/orders/orders.slice';
 
 
 
 export const AppRouter = () => {
 
   const dispatch = useAppDispatch();
-  const {name, uid} = useAppSelector((state) => state.auth)
+  const {name, uid} = useAppSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(startChecking())
+    dispatch(startChecking());
+    dispatch(startGetAllClients());
+    dispatch(startGetAllOrders());
   }, [])
   
 
@@ -45,8 +49,6 @@ export const AppRouter = () => {
             }
           />
         </Routes>
-
-
       </BrowserRouter>
 
     </div>

@@ -2,6 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../Redux/store';
 import { fetchSinToken, fetchConToken } from '../../Helpers/fetch';
 import Swal from 'sweetalert2';
+import { startGetAllProducts } from '../products/product.slice';
+import { ArrayAvalibleCategories } from '../products/avalibles.slice';
+import { Products } from '../../Pages/Products/Intefaces';
+import { useAppSelector } from '../../Redux/hooks';
+import { startGetAllClients } from '../clients/clients.slice';
 
 
 interface AuthProps {
@@ -10,7 +15,7 @@ interface AuthProps {
   checking: boolean;
 };
 
-export const initialState:AuthProps = {
+export const initialState: AuthProps = {
   name: '',
   uid: '',
   checking: true,
@@ -19,17 +24,17 @@ export const initialState:AuthProps = {
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers:{
+  reducers: {
     startLogin: (state) => {
-      return{
+      return {
         ...state,
         name: '',
         uid: '',
       }
     },
 
-    login: (state, action:PayloadAction<AuthProps>) => {
-      return{
+    login: (state, action: PayloadAction<AuthProps>) => {
+      return {
         ...state,
         name: action.payload.name,
         uid: action.payload.uid,
@@ -37,15 +42,15 @@ export const authSlice = createSlice({
       }
     },
 
-    authCheckinFinish: (state)=> {
-      return{
+    authCheckinFinish: (state) => {
+      return {
         ...state,
         checking: false
       }
     },
 
     logout: (state) => {
-      return{
+      return {
         ...state,
         name: '',
         uid: '',
@@ -56,18 +61,21 @@ export const authSlice = createSlice({
 });
 
 
-export const startAuth = (email:string, password:string): AppThunk => {
+export const startAuth = (email: string, password: string): AppThunk => {
 
   return async (dispatch) => {
     try {
-      const res = await fetchSinToken('auth', {email, password}, 'POST');
+      const res = await fetchSinToken('auth', { email, password }, 'POST');
       const body = await res.json()
 
-      if(body.ok){
+      if (body.ok) {
         localStorage.setItem('token', body.token);
-        localStorage.setItem('token-init-date', new Date().getTime().toString() );  
+        localStorage.setItem('token-init-date', new Date().getTime().toString());
         dispatch(login(body));
-      }else{
+        await dispatch(startGetAllProducts());
+        await dispatch(startGetAllClients())
+
+      } else {
         Swal.fire({
           icon: 'error',
           title: body.msg,
@@ -86,12 +94,12 @@ export const startChecking = (): AppThunk => {
     const resp = await fetchConToken('auth/renew');
     const body = await resp.json();
 
-    if(body.ok){
+    if (body.ok) {
       localStorage.setItem('token', body.token);
       localStorage.setItem('token-init-date', new Date().getTime().toString());
 
       dispatch(login(body));
-    }else{
+    } else {
       dispatch(authCheckinFinish())
     }
   }

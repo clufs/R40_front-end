@@ -2,22 +2,43 @@ import { RootState, AppThunk } from '../../Redux/store';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
-interface UIProps{
-
+interface UIProps {
+  isModalOpen1: boolean;
+  isModalOpen2: boolean;
+  isDragging:   boolean;
 }
 
 export const initialState: UIProps = {
-
+  isModalOpen1: false,
+  isModalOpen2: false,
+  isDragging:   false,
 }
 
 export const uiSlice = createSlice({
   name: 'ui',
   initialState,
-  reducers:{ 
-
+  reducers: {
+    setModalOpen1: (state, action: PayloadAction<boolean>) => {
+      return {
+        ...state,
+        isModalOpen1: action.payload
+      }
+    },
+    setModalOpen2: (state, action: PayloadAction<boolean>) => {
+      return {
+        ...state,
+        isModalOpen2: action.payload
+      }
+    },
+    setDragging: (state, action: PayloadAction<boolean>) => {
+      return {
+        ...state,
+        isDragging: action.payload
+      }
+    },
   }
 });
 
-export const {} = uiSlice.actions;
+export const { setModalOpen1, setModalOpen2, setDragging } = uiSlice.actions;
 
 export default uiSlice.reducer;

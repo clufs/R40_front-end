@@ -1,0 +1,5 @@
+.chart-container{
+  height: calc(100vh - 250px);
+  padding:  10px;
+  padding-bottom: 30px;
+}
