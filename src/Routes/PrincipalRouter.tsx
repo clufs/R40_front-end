@@ -18,7 +18,7 @@ import { NewClient } from "../Pages/Clients/NewClient";
 import { NewOrder } from "../Pages/Orders/NewOrder";
 import { DetailOrder } from "../Pages/Orders/DetailOrder/DetailOrder";
 import { OrderPanel } from '../Pages/Orders/OrderPanel/OrderPanel';
-import { Invoice } from "../Pages/Orders/OrderPanel/components/Envoice/EnvoicePage";
+import { EnvoicePage } from "../Pages/Orders/OrderPanel/components/Envoice/EnvoicePage";
 
 export const PrincipalRouter = () => {
 
@@ -48,7 +48,7 @@ export const PrincipalRouter = () => {
           <Route path="/ordenes/nueva" element={<NewOrder />} />
           <Route path="/ordenes/:id" element={<DetailOrder />} />
           <Route path="/ordenes/:id/panel" element={<OrderPanel />} />
-          <Route path="/ordenes/:id/invoice" element={<Invoice />} />
+          <Route path="/ordenes/:id/invoice" element={<EnvoicePage />} />
 
 
 

@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { Order } from "../../features/orders/interfaces";
 import { startGetAllOrders, startSelectOrder } from "../../features/orders/orders.slice";
 import { useAppSelector, useAppDispatch } from '../../Redux/hooks';
-import { Invoice } from "./OrderPanel/components/Envoice/EnvoicePage";
 
 export const Orders = () => {
 

@@ -5,8 +5,6 @@ import { MyPie } from '../../../Components/charts/MyPie';
 
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { useNavigate } from 'react-router-dom';
-import { Invoice } from '../OrderPanel/components/Envoice/EnvoicePage';
-import ReactPDF, { PDFViewer } from '@react-pdf/renderer';
 
 export const DetailOrder = () => {
 
@@ -31,7 +29,7 @@ export const DetailOrder = () => {
 
   const handleClickEnvoice = () => {
     // ReactPDF.render(<Invoice />, `${__dirname}/example.pdf`);
-    navigate(`/ordenes/${selected._id}/invoce`)
+    navigate(`/ordenes/${selected._id}/invoice`)
   }
 
 
