@@ -16,8 +16,8 @@ export const MyStepper = () =>  {
   return (
     <Box sx={{ width: '100%' }}>
       <Stepper activeStep={countStep} alternativeLabel>
-        {steps.map((label) => (
-          <Step key={label}>
+        {steps.map((label,i) => (
+          <Step key={i}>
             <StepLabel>{label}</StepLabel>
           </Step>
         ))}

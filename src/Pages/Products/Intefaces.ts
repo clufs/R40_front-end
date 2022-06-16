@@ -10,4 +10,5 @@ export interface Products {
   temp: string,
   time: string,
   presion: string,
+  id: string
 };

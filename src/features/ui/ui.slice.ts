@@ -5,12 +5,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface UIProps {
   isModalOpen1: boolean;
   isModalOpen2: boolean;
+  isModalOpen3: boolean;
+
   isDragging:   boolean;
 }
 
 export const initialState: UIProps = {
   isModalOpen1: false,
   isModalOpen2: false,
+  isModalOpen3: false,
+
   isDragging:   false,
 }
 
@@ -30,6 +34,14 @@ export const uiSlice = createSlice({
         isModalOpen2: action.payload
       }
     },
+    setModalOpen3: (state, action: PayloadAction<boolean>) => {
+      return {
+        ...state,
+        isModalOpen3: action.payload
+      }
+    },
+
+
     setDragging: (state, action: PayloadAction<boolean>) => {
       return {
         ...state,
@@ -39,6 +51,6 @@ export const uiSlice = createSlice({
   }
 });
 
-export const { setModalOpen1, setModalOpen2, setDragging } = uiSlice.actions;
+export const { setModalOpen1, setModalOpen2, setModalOpen3, setDragging } = uiSlice.actions;
 
 export default uiSlice.reducer;

@@ -37,7 +37,7 @@ export const OrderList = ({ status }: props) => {
       status
     };
 
-    dispatch(startUpdateOrderItemStatus(selected._id.toString(), id, newOrder.status));
+    dispatch(startUpdateOrderItemStatus(selected._id, newOrder.status, id));
   }; 
 
 

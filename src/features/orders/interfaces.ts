@@ -8,8 +8,12 @@ export interface Order{
   Client: string,
   TotalPrice: number,
   TotalProfit: number,
+
+  dept: number,
   
   date: number,
+  period: string,
+
   status: StatusProps,
   dateFinish: number,
 }
@@ -26,4 +30,4 @@ export interface OrderItems{
   _id: string;
 }
 
-export type StatusProps = 'pending' | 'in-progress' | 'finished';
+export type StatusProps = 'pending' | 'in-progress' | 'finished' | 'shiped' | 'canceled';

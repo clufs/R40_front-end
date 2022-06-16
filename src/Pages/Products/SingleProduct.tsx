@@ -7,7 +7,6 @@ import { BasicModal, BasicModal_2 } from '../../Components/modals/Modals';
 
 
 
-
 export const SingleProduct = () => {
 
   const dispatch = useAppDispatch()
@@ -21,17 +20,14 @@ export const SingleProduct = () => {
     dispatch(setModalOpen2(true));
   };
 
-
-
-
   return (
-
     <>
       <BasicModal />
       <BasicModal_2 />
 
 
-      <h3>{name}</h3>
+      <h1>{name}</h1>
+      <hr />
 
       <Grid container spacing={2} paddingTop={2}>
         <Grid item xs={12} sm={6}>
@@ -66,12 +62,10 @@ export const SingleProduct = () => {
             <Typography variant="h5" sx={{ paddingLeft: 5 }}>Ganancia:</Typography>
             <Typography variant="h4" sx={{ paddingLeft: 5 }}>$ {profits} </Typography>
             <hr />
-            <Typography variant="h5" sx={{ paddingLeft: 5 }}>Porcentaje de ganancia:</Typography>
+            <Typography variant="h5" sx={{ paddingLeft: 5 }}>Porcentaje:</Typography>
             <Typography variant="h4" sx={{ paddingLeft: 5 }}>% {percentage} </Typography>
           </Paper>
         </Grid>
-
-
       </Grid>
     </>
   )

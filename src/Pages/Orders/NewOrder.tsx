@@ -9,6 +9,7 @@ import './styles.css'
 import { useAppDispatch } from '../../Redux/hooks';
 import { startNewOrder } from '../../features/orders/orders.slice';
 import { useNavigate } from 'react-router-dom';
+import { setDateFormat } from '../../Helpers/dateFunctions';
 
 export interface OrderProps1 {
   Order: {
@@ -29,6 +30,7 @@ export interface OrderProps1 {
   date: number,
   status: string,
   dateFinish: number,
+  period: string,
 }
 
 
@@ -56,6 +58,7 @@ export const NewOrder = () => {
 
     order.date = Date.now();
     order.status = 'pending';
+    order.period = setDateFormat(Date.now())
 
 
     dispatch(startNewOrder(order));
@@ -83,6 +86,9 @@ export const NewOrder = () => {
         Client: 'Sin defenir',
         TotalPrice: 0,
         TotalProfit: 0,
+
+        period: '01/2022',
+        
 
         date: 0,
         status: '',
@@ -139,19 +145,19 @@ export const NewOrder = () => {
                                   <MyTextInput fullwidth={true} label="Cantidad" name={`Order.${index}.cant`} type='number' />
                                 </Grid>
 
-                                <Grid xs={1} padding={.2}>
+                                <Grid xs={.6} padding={.2}>
                                   <MyTextInput fullwidth={true} label="Talle" name={`Order.${index}.size`} type='number' />
                                 </Grid >
 
-                                <Grid xs={2} padding={.2}>
+                                <Grid xs={4} padding={.2}>
                                   <MySelect label="Producto" name={`Order.${index}.product`} />
                                 </Grid>
 
-                                <Grid xs={2} padding={.2}>
+                                <Grid xs={1} padding={.2}>
                                   <MyPrice label={'Precio final'} name={`Order.${index}.price`} index={index} />
                                 </Grid >
 
-                                <Grid xs={3} padding={.2}>
+                                <Grid xs={2} padding={.2}>
                                   <MyPriceSubTotal
                                     label={'Precio Total'}
                                     name={`Order.${index}.subTotalPrice`}

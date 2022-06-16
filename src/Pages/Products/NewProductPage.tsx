@@ -1,14 +1,14 @@
-import { Button, Grid, Card, CardContent, Typography } from '@mui/material';
+import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, IconButton, Typography, TextField, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Card } from '@mui/material';
 import { FastField, Form, Formik } from "formik"
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
-import { number } from 'yup/lib/locale';
 import { MyTextInput } from "../../Components/formik/MyTextInput";
 import { startAddNewProduct, startGetAllProducts } from '../../features/products/product.slice';
 import { useAppDispatch } from '../../Redux/hooks';
+
+import AddIcon from '@mui/icons-material/Add';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import { Products } from './Intefaces';
-
-
 
 export const NewProductPage = () => {
 
@@ -20,7 +20,6 @@ export const NewProductPage = () => {
     // dispatch(startGetAllProducts());
     navigate(-1)
   }
-
 
 
   return (
@@ -35,52 +34,42 @@ export const NewProductPage = () => {
           category: '',
           subCategory: '',
 
-          temp: '',
-          time: '',
-          presion: '',
-
-          price: 0,
-          size: 0,
           raw_material_price: 0,
+          percentage: 0,
+          price: 0,
           profits: 0,
-          percentage: 0
+
+          id: ''
         }}
 
         onSubmit={(Products) => {
           console.log(Products);
-          createNewProduct(Products);
+          // createNewProduct(Products);
         }}
 
         validationSchema={yup.object({
           name: yup
             .string()
-            .max(30, 'El maximo es 15 caracteres.')
+            .max(60, 'El maximo es 30 caracteres.')
             .required('Este campo es requerido.'),
           category: yup
             .string()
             .max(20, 'El maximo es de 10 caracteres.')
             .required('Este campo es requerido.'),
+
           subCategory: yup
             .string()
             .max(20, 'El maximo es de 10 caracteres.')
             .required('Este campo es requerido.'),
-          size: yup
-            .number()
-            .default(0),
+
           price: yup
-            .number()
-            .required('El precio es requerido.'),
+            .string()
+            .max(20, 'El maximo es de 10 caracteres.')
+            .required('Este campo es requerido.'),
+
           raw_material_price: yup
             .number()
             .required('El precio de la materia prima es requerido.'),
-          percentage: yup
-            .number(),
-          temp: yup
-            .string(),
-          time: yup
-            .string(),
-          presion: yup
-            .string(),
 
         })}
       >
@@ -90,36 +79,23 @@ export const NewProductPage = () => {
 
               <Grid container spacing={2} >
                 <Grid item xs={12} sm={6} marginBottom={1}>
-                  <MyTextInput label={"Nombre del producto"} name={"name"} />
                   <MyTextInput label={"Nombre de la categoria"} name={"category"} />
-                  <MyTextInput label={"Nombre de la sub-categoria"} name={"subCategory"} />
-                  <MyTextInput label={"Talle (opcional)"} name={"size"} type='number' />
+                  <MyTextInput label={"Nombre de la subcategoria"} name={"subCategory"} />
+                  <MyTextInput label={"Nombre del producto"} name={"name"} />
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
-                  <MyTextInput label={"Ingrese el precio"} name={"price"} type='number' />
                   <MyTextInput label={"Ingrese el precio de fabricacion"} name={"raw_material_price"} type='number' />
-                  <Grid item xs={12}>
-                    <Card >
-                      <CardContent >
-                        <Typography variant="h6">
-                          Ganancia total:
-                        </Typography>
+                  <MyTextInput label={"Ingrese el precio de venta"} name={"price"} type='number' />
+                  <hr />
 
-                        <Typography variant="h5">
-                          $ {values.profits = values.price - values.raw_material_price}
-                        </Typography>
+                  <Card sx={{ padding: 2 }}>
+                    <Typography variant='subtitle1'>Ganancias: </Typography>
+                    <Typography variant='body1' ><strong> $ 3000 </strong></Typography>
 
-                        <Typography variant="h6">
-                          Porcentaje:
-                        </Typography>
-
-                        <Typography variant="h5">
-                          % {(values.raw_material_price) && (values.percentage = (values.profits * 100) / values.raw_material_price)}
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </Grid>
+                    <Typography variant='subtitle1'>Porcentage:  </Typography>
+                    <Typography variant='body1'><strong> % 33.4 </strong></Typography>
+                  </Card>
                 </Grid>
 
               </Grid>
@@ -132,7 +108,7 @@ export const NewProductPage = () => {
           )
         }
 
-      </Formik>
+      </Formik >
 
 
     </>

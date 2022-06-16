@@ -47,7 +47,7 @@ export const OrderCard = ({ order }: OrderCardProps) => {
             <strong>Cantidad:</strong> {order.cant} unidades
           </Typography>
           <Typography>
-            <strong>Precio:</strong> ${order.price} | <strong>Ganancia: </strong> ${order.profit}
+            <strong>Precio:</strong> ${order.subTotalPrice} | <strong>Ganancia: </strong> ${order.profit}
           </Typography>
         </CardContent>
       </CardActionArea>

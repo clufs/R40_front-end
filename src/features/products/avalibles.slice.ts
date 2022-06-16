@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Products } from '../../Pages/Products/Intefaces';
+import { Products } from "../../Pages/Products/Intefaces";
 import { AppThunk } from "../../Redux/store";
+
 
 
 
@@ -27,6 +28,7 @@ export const initialState: AvalibleProductsProps = {
     temp: '',
     time: '',
     presion: '',
+    id: ''
   }
 }
 
@@ -71,7 +73,6 @@ export const ArrayAvalibleCategories = (products: Products[]): AppThunk => {
         categories.push(product.category)
       })
       const a = new Set(categories);
-      console.log(a);
       dispatch(setArrayCategories(Array.from(a)))
     } catch (error) {
       console.log(error)
@@ -90,7 +91,6 @@ export const ArrayAvalibleSubCategories = (products: Products[], category: strin
       })
 
       const a = new Set(subCategories);
-      console.log(a);
       dispatch(setArraySubCategories(Array.from(a)));
 
 
@@ -112,7 +112,6 @@ export const ArrayAvalibleProducts = (products: Products[], subCategory: string,
       })
 
       const a = new Set(productsAvalible);
-      console.log(a);
       dispatch(setArrayProducts(Array.from(a)));
 
     }catch(error){
@@ -123,7 +122,6 @@ export const ArrayAvalibleProducts = (products: Products[], subCategory: string,
 
 export const getOneProduct = (products:Products[], category: string, subCategory: string, name: string ):AppThunk => {
 
-  console.log('1',category, '2',subCategory, '3',name);
   
   return async (dispatch) => {
 
@@ -132,10 +130,12 @@ export const getOneProduct = (products:Products[], category: string, subCategory
         (e) => 
           e.category === category && 
           e.subCategory === subCategory && 
-          e.name === name);
+          e.name === name
+          
+          );
 
-      console.log(oneProduct);
-      const toSend = oneProduct[0]
+       const toSend = oneProduct[0]
+
       if(oneProduct){
         dispatch(setViewProduct(toSend))
       }

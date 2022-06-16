@@ -1,4 +1,4 @@
-import {formatDistanceToNow} from 'date-fns'
+import {format, formatDistanceToNow, } from 'date-fns'
 import {es} from 'date-fns/locale'
 
 export const getFormatDistanceToNow = (date: number) => {
@@ -7,3 +7,11 @@ export const getFormatDistanceToNow = (date: number) => {
 
   return `hace ${fromNow}`
 };
+
+
+export const setDateFormat = (date: number) => {
+
+  const newDate = format( date, 'MM/yyyy', {locale: es}).toString();
+  return newDate
+
+}

@@ -23,16 +23,12 @@ export const Category__Select = () => {
 
   return (
 
-    <Grid container spacing={2} sx={{
-      display: 'flex',
-      justifyContent: 'center',
-      margin: 4
-    }}  >
+    <Grid container spacing={2} margin={2} >
       {
-        category.map((category) => {
+        category.map((category,i) => {
           return (
 
-            <Grid xs={6} key={category}>
+            <Grid xs={6} key={i}>
 
               <Card
                 sx={{ marginBottom: 1, display: 'flex', margin: 2 }}
@@ -78,10 +74,10 @@ export const SubCategory__Select = () => {
       margin: 4
     }}  >
       {
-        subCategory.map((subCategory) => {
+        subCategory.map((subCategory,i) => {
           return (
 
-            <Grid xs={6} key={subCategory}>
+            <Grid xs={6} key={i}>
 
               <Card
                 sx={{ marginBottom: 1, display: 'flex', margin: 2 }}

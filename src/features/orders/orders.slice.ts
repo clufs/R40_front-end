@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { AppThunk } from "../../Redux/store";
-import { Order, StatusProps, OrderItems } from './interfaces';
+import { Order, StatusProps } from './interfaces';
 import { fetchConToken } from '../../Helpers/fetch';
 import { OrderProps1 } from "../../Pages/Orders/NewOrder";
 import Swal from "sweetalert2";
+
 
 
 interface OrderProps {
@@ -27,6 +28,11 @@ export const initialState: OrderProps = {
     date: 0,
     status: 'pending',
     dateFinish: 0,
+    dept: 0,
+
+    period: ''
+
+    
   },
 };
 
@@ -101,24 +107,53 @@ export const startNewOrder = (order: OrderProps1): AppThunk => {
 
 };
 
-export const startUpdateOrderItemStatus = (idCol: string, id: string, status: StatusProps): AppThunk => {
-  return async (dispatch) => {
-    try {
 
-      const res = await fetchConToken('orders/update-status-order', { idCol, id, status }, 'POST');
+
+export const startUpdateOrderItemStatus = (_id: number, status: StatusProps, idOrderItem: string): AppThunk => {
+  return async (dispatch) => {
+    console.log('se ingreso en el slice')
+    try {
+      console.log('se ingreso en el try')
+      const res = await fetchConToken('orders/update-status-order_item', { _id, status, idOrderItem }, 'POST');
       const body = await res.json();
 
-
       if (body.ok) {
+        
         dispatch(refreshOrdersStatus(body.order));
-      }
+        dispatch(startGetAllOrders())
 
+      }
 
     } catch (error) {
       console.log(error)
     }
   }
+};
+
+export const startUpdateOrderStatus = (_id: string, status: StatusProps):AppThunk => {
+
+  return async ( dispatch ) => {
+
+    try {
+      const res = await fetchConToken('orders/update-status-order', { _id, status }, 'POST');
+      const body = await res.json();
+
+      if (body.ok) {
+        console.log(body)
+        dispatch(refreshOrdersStatus(body.order));
+        dispatch(startGetAllOrders())
+
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+
+
+  }
+
 }
+
 
 export const startGetAllOrders = (): AppThunk => {
   return async (dispatch) => {
@@ -127,6 +162,7 @@ export const startGetAllOrders = (): AppThunk => {
       const { orders } = await res.json()
 
       if (orders && orders.length > 0) {
+        
         await dispatch(getAllOrders(orders))
       } else {
         console.log(' no hay ordenes ');
@@ -146,6 +182,45 @@ export const startSelectOrder = (order: Order[], id: number): AppThunk => {
 
   }
 };
+
+export const startUpdate__dept = ( id: string, dept: number): AppThunk => {
+ 
+
+  return async ( dispatch ) => {
+    const res = await fetchConToken(`orders/update-dept-order`,  {id,dept} , 'POST');
+    const body = await res.json();
+
+
+    console.log( body.order )
+
+    if (body.ok) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Se actualizo el saldo Exitosamente!',
+        timer: 2400,
+        position: 'top-end',
+        toast: true,
+        showConfirmButton: false,
+        timerProgressBar: true,
+      });
+
+      dispatch(startGetAllOrders());
+      
+
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: body.msg + '.',
+        position: 'center',
+        toast: true,
+        showConfirmButton: true,
+        timerProgressBar: true,
+      });
+    }
+  }
+
+
+}
 
 
 
