@@ -9,6 +9,7 @@ import { useAppDispatch } from '../../Redux/hooks';
 import AddIcon from '@mui/icons-material/Add';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import { Products } from './Intefaces';
+import { useState } from 'react';
 
 export const NewProductPage = () => {
 
@@ -20,6 +21,15 @@ export const NewProductPage = () => {
     // dispatch(startGetAllProducts());
     navigate(-1)
   }
+
+  const initialState = {
+    profitValue : 0,
+    profitPercentage: 0
+  };
+
+  const [profit, setProfit] = useState(initialState);
+
+  
 
 
   return (
