@@ -27,6 +27,7 @@ export interface OrderItems{
   profit: number;
 
   status: StatusProps;
+  slug?: string;
   _id: string;
 }
 

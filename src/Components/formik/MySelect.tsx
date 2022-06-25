@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select, TextField, Divider, Typography } from '@mui/material';
 import { ErrorMessage, Field, useField } from "formik"
 import { useAppSelector } from "../../Redux/hooks";
 
@@ -26,7 +26,7 @@ export const MySelect = ({ label, ...props }: Props) => {
         >
           {
             products.map( prod => (
-              <MenuItem value={prod.name}>{prod.name}</MenuItem>
+              <MenuItem value={prod.name}><Typography><strong>{`${prod.subCategory} `}</strong>  {`${prod.name}`}</Typography></MenuItem>
             ))
           }
         </Select>

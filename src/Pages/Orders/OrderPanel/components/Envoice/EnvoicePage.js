@@ -112,11 +112,6 @@ export const EnvoicePage = (selected) => {
 
 
 
-
-
-  const savePDF = () => {
-  }
-
 }
 
 

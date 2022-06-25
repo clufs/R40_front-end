@@ -37,14 +37,26 @@ export const startGetAllProducts = (): AppThunk => {
       const res = await fetchConToken('products');
       const { products } = await res.json();
 
+      console.log(products);
 
-      dispatch(getAllProducts(products));
+      if( products !== undefined) {
+
+        dispatch(getAllProducts(products));
+    
+        dispatch(ArrayAvalibleCategories(products));
+  
+        return products
+      }
+      if(products === undefined) {
+
+        dispatch(getAllProducts([]));
+  
+        dispatch(ArrayAvalibleCategories([]));
+  
+        return products
+      }
 
 
-      dispatch(ArrayAvalibleCategories(products));
-
-
-      return products
 
 
     } catch (error) {

@@ -17,6 +17,9 @@ export interface OrderProps1 {
     size: number;
     product: string;
     price: number;
+
+    slug: string;
+
     subTotalPrice: number;
 
     status: string,
@@ -80,15 +83,25 @@ export const NewOrder = () => {
               price: 0,
               subTotalPrice: 0,
               profit: 0,
-              status: 'pending'
+              status: 'pending',
+              slug: ''
             }
           ],
         Client: 'Sin defenir',
+
         TotalPrice: 0,
         TotalProfit: 0,
 
+        // totalProducts: 0,
+
+        // totalRemerasNinos: 0,
+        // totalRemerasAdultos: 0,
+        // totalChapas: 0,
+        // totalStickers: 0,
+        // totalGorras: 0,
+
         period: '01/2022',
-        
+
 
         date: 0,
         status: '',
@@ -108,9 +121,6 @@ export const NewOrder = () => {
           <>
             <h1>Nueva Orden</h1>
             <hr />
-            {
-              console.log(values.TotalPrice)
-            }
             <Form>
               <Grid container>
 
@@ -191,7 +201,9 @@ export const NewOrder = () => {
                                         price: 0,
                                         subTotalPrice: 0,
                                         profit: 0,
-                                        status: 'pending'
+                                        status: 'pending',
+                                        slug: ''
+
                                       }
                                     )}>
                                     <AddIcon />
@@ -215,7 +227,8 @@ export const NewOrder = () => {
                           price: 0,
                           subTotalPrice: 0,
                           profit: 0,
-                          status: 'pending'
+                          status: 'pending',
+                          slug: ''
                         })}>
                           Agregar Productos
                         </Button>

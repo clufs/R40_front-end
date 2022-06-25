@@ -158,7 +158,7 @@ export const Orders = () => {
               <TabPanel value="3">
                 <List sx={{ maxHeight: '65vh', overflow: 'scroll' }}>
                   {
-                    (ordenesTerminadas.length !== 0)
+                    (ordenesTerminadas.length === 0)
                       ?
                       <h1>No hay ordenes Entregadas</h1>
                       :

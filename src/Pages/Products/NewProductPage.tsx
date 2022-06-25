@@ -6,10 +6,7 @@ import { MyTextInput } from "../../Components/formik/MyTextInput";
 import { startAddNewProduct, startGetAllProducts } from '../../features/products/product.slice';
 import { useAppDispatch } from '../../Redux/hooks';
 
-import AddIcon from '@mui/icons-material/Add';
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import { Products } from './Intefaces';
-import { useState } from 'react';
 
 export const NewProductPage = () => {
 
@@ -18,7 +15,7 @@ export const NewProductPage = () => {
 
   const createNewProduct = (Products: Products) => {
     dispatch(startAddNewProduct(Products));
-    // dispatch(startGetAllProducts());
+    dispatch(startGetAllProducts());
     navigate(-1)
   }
 
@@ -27,7 +24,6 @@ export const NewProductPage = () => {
     profitPercentage: 0
   };
 
-  const [profit, setProfit] = useState(initialState);
 
   
 
@@ -43,6 +39,7 @@ export const NewProductPage = () => {
           name: '',
           category: '',
           subCategory: '',
+          slug:'',
 
           raw_material_price: 0,
           percentage: 0,
@@ -54,7 +51,9 @@ export const NewProductPage = () => {
 
         onSubmit={(Products) => {
           console.log(Products);
-          // createNewProduct(Products);
+          Products.percentage = (Products.profits / Products.price )*100
+          
+          createNewProduct(Products);
         }}
 
         validationSchema={yup.object({
@@ -91,20 +90,21 @@ export const NewProductPage = () => {
                 <Grid item xs={12} sm={6} marginBottom={1}>
                   <MyTextInput label={"Nombre de la categoria"} name={"category"} />
                   <MyTextInput label={"Nombre de la subcategoria"} name={"subCategory"} />
-                  <MyTextInput label={"Nombre del producto"} name={"name"} />
+                  <MyTextInput label={"Nombre del producto visible"} name={"name"} />
+                  <MyTextInput label={"Nombre del grupo"} name={"slug"} />
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
-                  <MyTextInput label={"Ingrese el precio de fabricacion"} name={"raw_material_price"} type='number' />
                   <MyTextInput label={"Ingrese el precio de venta"} name={"price"} type='number' />
+                  <MyTextInput label={"Ingrese el precio de fabricacion"} name={"raw_material_price"} type='number' />
                   <hr />
 
                   <Card sx={{ padding: 2 }}>
                     <Typography variant='subtitle1'>Ganancias: </Typography>
-                    <Typography variant='body1' ><strong> $ 3000 </strong></Typography>
+                    <Typography variant='body1' ><strong>$ {values.profits = values.price - values.raw_material_price}</strong></Typography>
 
                     <Typography variant='subtitle1'>Porcentage:  </Typography>
-                    <Typography variant='body1'><strong> % 33.4 </strong></Typography>
+                    <Typography variant='body1'><strong> % {values.price !== 0 ? ((values.profits/values.price)*100).toFixed(2) : 0} </strong></Typography>
                   </Card>
                 </Grid>
 

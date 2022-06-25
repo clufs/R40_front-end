@@ -30,40 +30,12 @@ export const Products = () => {
     navigate('/productos/stock');
   };
 
-  const abc = [
-    {
-      number: 12
-    },
-    {
-      number: -2
 
-    },
-    {
-      number: 1
-
-    },
-    {
-      number: 33
-    }
-  ]
 
   const productsToSort = [...products];
-
-  console.log(abc.sort((a, b) => a.number - b.number));
-  console.log(productsToSort.sort((a, b) => b.percentage - a.percentage))
+  productsToSort.sort((a, b) => b.percentage - a.percentage)
 
 
-  const data = {
-
-    labels: productsToSort.map(e => e.name),
-    datasets: [
-      {
-        label: 'Ganancias',
-        data: productsToSort.map(e => e.percentage),
-        backgroundColor: 'rgba(255, 99, 50, 0.5)',
-      },
-    ],
-  };
 
   return (
     <>
@@ -74,16 +46,11 @@ export const Products = () => {
         <Grid item xs={12} sm={9} >
           <Card sx={{ height: 'auto' }} >
             <CardHeader title='Productos con mayor ganancia.' />
-            {/* {
-              products.map( e => (
-                <h5>{e.name} %{((e.profits / e.price) * 100).toFixed(2)} </h5>
-              ))
-            } */}
+
             <Card sx={{ maxHeight: '100%', height: 'calc(100vh - 210px)', margin: 1, overflow: 'scroll' }} >
 
-              {/* <ProductChartPercentage data={data} /> */}
               <Table>
-                <TableHead>
+                <TableHead >
                   <TableRow>
                     <TableCell align="center">n</TableCell>
                     <TableCell align="center">Producto</TableCell>
@@ -101,11 +68,11 @@ export const Products = () => {
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                       <TableCell align="center">{id + 1}</TableCell>
-                      <TableCell align="center">{product.name}</TableCell>
+                      <TableCell align="center"><strong>{product.subCategory}</strong> - {product.name}</TableCell>
                       <TableCell align="center">$ {product.price}</TableCell>
                       <TableCell align="center">$ {product.raw_material_price}</TableCell>
                       <TableCell align="center">$ {product.profits}</TableCell>
-                      <TableCell align="center">% {product.percentage}</TableCell>
+                      <TableCell align="center">% {product.percentage?.toFixed(2)}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -131,7 +98,7 @@ export const Products = () => {
               </Typography>
             </Button>
 
-            <Button variant='contained' color="success" sx={{ padding: 1, margin: 1, width: '100%' }} onClick={viewStock}>
+            <Button disabled variant='contained' color="success" sx={{ padding: 1, margin: 1, width: '100%' }} onClick={viewStock}>
               <Typography sx={{ whiteSpace: 'pre-line' }}>
                 Stock
               </Typography>

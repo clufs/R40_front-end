@@ -61,6 +61,12 @@ export const DetailOrder = () => {
 
   }, [orders])
 
+
+  const tiposDeProductos:string[] = [];
+
+  selected.Order.map( order => console.log( order.product, order.slug ));
+
+
   return (
 
     <div>
