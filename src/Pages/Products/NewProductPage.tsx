@@ -1,12 +1,20 @@
-import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, IconButton, Typography, TextField, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Card } from '@mui/material';
+import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, IconButton, Typography, TextField, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Card, Chip } from '@mui/material';
 import { FastField, Form, Formik } from "formik"
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { MyTextInput } from "../../Components/formik/MyTextInput";
 import { startAddNewProduct, startGetAllProducts } from '../../features/products/product.slice';
 import { useAppDispatch } from '../../Redux/hooks';
-
 import { Products } from './Intefaces';
+import { SubCategory__Select } from './Components/WizzarProduct';
+import { useEffect, useState } from 'react';
+
+import AddIcon from '@mui/icons-material/Add';
+
+
+
+
+// let sizes:string[] = [];
 
 export const NewProductPage = () => {
 
@@ -20,16 +28,52 @@ export const NewProductPage = () => {
   }
 
   const initialState = {
-    profitValue : 0,
+    profitValue: 0,
     profitPercentage: 0
   };
 
+  const [size, setSize] = useState<any>();
+  const [sizes, setSizes] = useState<string[]>([]);
 
-  
+  const setinho = () => {
+    if (!sizes.includes(size)! && size !== '') {
+      setSizes(prev => {
+        return [...prev, size];
+      });
+      setSize('')
+    };
+  };
+
+  const handleDeleteSize = (i: any) => {
+    setSizes(prev => {
+      prev.splice(i, i + 1);
+      return [...prev]
+    });
+  };
+
+  const [variant, setVariant] = useState<any>();
+  const [variants, setVariants] = useState<string[]>([]);
+
+  const setVariantsFunc = () => {
+    if (!variants.includes(variant)! && variant !== ''){
+      setVariants( prev => {
+        return [...prev, variant];
+      });
+      setVariant('');
+    }
+  };
+
+  const handleDeleteVariant = (i:number) => {
+    setVariants( prev => {
+      prev.splice(i, i+1);
+      return [...prev];
+    })
+  }
+
+
 
 
   return (
-
 
     <>
       <h1>Agregar</h1>
@@ -39,7 +83,9 @@ export const NewProductPage = () => {
           name: '',
           category: '',
           subCategory: '',
-          slug:'',
+
+          sizes: [],
+          variant: [],
 
           raw_material_price: 0,
           percentage: 0,
@@ -50,9 +96,9 @@ export const NewProductPage = () => {
         }}
 
         onSubmit={(Products) => {
-          console.log(Products);
-          Products.percentage = (Products.profits / Products.price )*100
-          
+
+          Products.percentage = (Products.profits / Products.price) * 100
+
           createNewProduct(Products);
         }}
 
@@ -62,11 +108,6 @@ export const NewProductPage = () => {
             .max(60, 'El maximo es 30 caracteres.')
             .required('Este campo es requerido.'),
           category: yup
-            .string()
-            .max(20, 'El maximo es de 10 caracteres.')
-            .required('Este campo es requerido.'),
-
-          subCategory: yup
             .string()
             .max(20, 'El maximo es de 10 caracteres.')
             .required('Este campo es requerido.'),
@@ -87,11 +128,52 @@ export const NewProductPage = () => {
             <Form>
 
               <Grid container spacing={2} >
+
                 <Grid item xs={12} sm={6} marginBottom={1}>
                   <MyTextInput label={"Nombre de la categoria"} name={"category"} />
-                  <MyTextInput label={"Nombre de la subcategoria"} name={"subCategory"} />
                   <MyTextInput label={"Nombre del producto visible"} name={"name"} />
-                  <MyTextInput label={"Nombre del grupo"} name={"slug"} />
+                  <TextField
+                    name='sizes'
+                    label="Talles"
+                    fullWidth
+                    value={size}
+                    margin='normal'
+                    onChange={e => setSize(e.target.value)}
+                    InputProps={{
+                      endAdornment: (
+                        <Button onClick={setinho} variant='contained'>
+                          <AddIcon />
+                        </Button>
+                      )
+                    }}
+                  />
+                  {
+                    sizes.map((s, i) => (
+                      <Chip sx={{ mt: 1, ml: 1  }} key={i} label={s} onDelete={() => handleDeleteSize(i)} />
+                    ))
+                  }
+                  <TextField
+
+                    name='variant'
+                    margin='normal'
+                    label="Variantes"
+                    fullWidth
+                    value={variant}
+                    sx={{ mt: 2 }}
+                    onChange={e => setVariant(e.target.value)}
+                    InputProps={{
+                      endAdornment: (
+                        <Button onClick={setVariantsFunc} variant='contained'>
+                          <AddIcon />
+                        </Button>
+                      )
+                    }}
+                  />
+                  {
+                    variants.map((s, i) => (
+                      <Chip variant='filled' sx={{ mt: 1, ml: 1 }} key={i} label={s} onDelete={() => handleDeleteVariant(i)} />
+                    ))
+                  }
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -104,7 +186,7 @@ export const NewProductPage = () => {
                     <Typography variant='body1' ><strong>$ {values.profits = values.price - values.raw_material_price}</strong></Typography>
 
                     <Typography variant='subtitle1'>Porcentage:  </Typography>
-                    <Typography variant='body1'><strong> % {values.price !== 0 ? ((values.profits/values.price)*100).toFixed(2) : 0} </strong></Typography>
+                    <Typography variant='body1'><strong> % {values.price !== 0 ? ((values.profits / values.price) * 100).toFixed(2) : 0} </strong></Typography>
                   </Card>
                 </Grid>
 

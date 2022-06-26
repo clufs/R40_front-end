@@ -15,11 +15,14 @@ import { NewProductPage } from "../Pages/Products/NewProductPage";
 import { SelectProductPage } from "../Pages/Products/SelectProductPage";
 import { SingleProduct } from '../Pages/Products/SingleProduct';
 import { NewClient } from "../Pages/Clients/NewClient";
-import { NewOrder } from "../Pages/Orders/NewOrder";
 import { DetailOrder } from "../Pages/Orders/DetailOrder/DetailOrder";
 import { OrderPanel } from '../Pages/Orders/OrderPanel/OrderPanel';
-import { EnvoicePage } from "../Pages/Orders/OrderPanel/components/Envoice/EnvoicePage";
+// import { EnvoicePage } from "../Pages/Orders/OrderPanel/components/Envoice/EnvoicePage";
 import { StockPage } from '../Pages/Products/StockPage';
+
+//*testing v2
+import { NewOrder_V2 } from '../Pages/Orders/V2__Create-new-order/NewOrder_V2';
+// import { NewOrder } from "../Pages/Orders/NewOrder";
 
 export const PrincipalRouter = () => {
 
@@ -47,7 +50,8 @@ export const PrincipalRouter = () => {
 
           
           <Route path="/ordenes" element={<Orders />} />
-          <Route path="/ordenes/nueva" element={<NewOrder />} />
+          {/* <Route path="/ordenes/nueva" element={<NewOrder />} /> */}
+          <Route path="/ordenes/nueva" element={<NewOrder_V2 />} />
           <Route path="/ordenes/:id" element={<DetailOrder />} />
           <Route path="/ordenes/:id/panel" element={<OrderPanel />} />
           {/* <Route path="/ordenes/:id/invoice" element={<EnvoicePage />} /> */}

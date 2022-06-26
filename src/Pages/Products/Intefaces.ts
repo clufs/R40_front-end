@@ -1,10 +1,19 @@
 export interface Products {
   name:string;
   category:string;
+
+
   subCategory:string;
+  size?: number;
+
+  sizes?: number[],
+  variant?: string[],
+
   slug?: string;
 
-  size?: number;
+
+
+
   percentage: number ;
   price:number;
   raw_material_price:number;
@@ -14,3 +23,4 @@ export interface Products {
   presion?: string,
   id: string
 };
+

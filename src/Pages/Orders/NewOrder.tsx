@@ -44,11 +44,9 @@ export const NewOrder = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-
   const setTotalPriceAndProfit = (order: OrderProps1): void => {
     order.TotalPrice = 0;
     order.TotalProfit = 0;
-
 
     order.Order.map(e => {
       order.TotalPrice = order.TotalPrice + e.subTotalPrice;
