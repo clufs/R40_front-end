@@ -7,7 +7,8 @@ export interface Order{
 
   Client: string,
   TotalPrice: number,
-  TotalProfit: number,
+  TotalProfit?: number,
+  TotalProfits?: number,
 
   dept: number,
   

@@ -5,7 +5,9 @@ import selectReducer from '../features/products/select.slice';
 import uiReducer from '../features/ui/ui.slice';
 import avalibleProducts from '../features/products/avalibles.slice';
 import clientsReducer from '../features/clients/clients.slice';
-import orderReducer from '../features/orders/orders.slice'
+import orderReducer from '../features/orders/orders.slice';
+import cartOrder from '../features/newOrder/cartOrder.slice'
+import addNewOrder from '../features/newOrder/newOrder.slice'
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +17,9 @@ export const store = configureStore({
     ui: uiReducer,
     avalible: avalibleProducts,
     clients: clientsReducer,
-    orders: orderReducer
+    orders: orderReducer,
+    newOrder: cartOrder,
+    addNewOrder,
   },
 });
 

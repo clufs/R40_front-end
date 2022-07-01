@@ -5,7 +5,7 @@ import { MySelect, MySelect2 } from '../../Components/formik/MySelect';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 
-import './styles.css'
+import './styles.module.css'
 import { useAppDispatch } from '../../Redux/hooks';
 import { startNewOrder } from '../../features/orders/orders.slice';
 import { useNavigate } from 'react-router-dom';
@@ -62,7 +62,7 @@ export const NewOrder = () => {
     order.period = setDateFormat(Date.now())
 
 
-    dispatch(startNewOrder(order));
+    // dispatch(startNewOrder(order));
     navigate(-1);
 
   };

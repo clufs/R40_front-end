@@ -1,15 +1,18 @@
 export interface Products {
   name:string;
   category:string;
-
-
   subCategory:string;
-  size?: number;
-
-  sizes?: number[],
-  variant?: string[],
-
+  
+  sizes?: string[];
+  variants?: string[];
+  colors?: string[];
+  
   slug?: string;
+  
+  size?: number;
+  color?: string;
+  variant?: string;
+  quantity?: number;
 
 
 
@@ -22,5 +25,7 @@ export interface Products {
   time?: string,
   presion?: string,
   id: string
+
+  _id?: string;
 };
 

@@ -32,7 +32,7 @@ export const NewProductPage = () => {
     profitPercentage: 0
   };
 
-  const [size, setSize] = useState<any>();
+  const [size, setSize] = useState<any>([]);
   const [sizes, setSizes] = useState<string[]>([]);
 
   const setinho = () => {
@@ -55,20 +55,41 @@ export const NewProductPage = () => {
   const [variants, setVariants] = useState<string[]>([]);
 
   const setVariantsFunc = () => {
-    if (!variants.includes(variant)! && variant !== ''){
-      setVariants( prev => {
+    if (!variants.includes(variant)! && variant !== '') {
+      setVariants(prev => {
         return [...prev, variant];
       });
       setVariant('');
     }
   };
 
-  const handleDeleteVariant = (i:number) => {
-    setVariants( prev => {
-      prev.splice(i, i+1);
+  const handleDeleteVariant = (i: number) => {
+    setVariants(prev => {
+      prev.splice(i, i + 1);
       return [...prev];
     })
+  };
+
+
+  const [color, setColor] = useState<any>();
+  const [colors, setColors] = useState<string[]>([])
+
+
+  const setColorFunc = () => {
+    if(!colors.includes(color)! && color!==''){
+      setColors(prev => {
+        return [...prev, color]
+      });
+      setColor('');
+    }
   }
+
+  const handleDeleteColor = (i: number) => {
+    setColors(prev => {
+      prev.splice( i, i+1);
+      return [...prev];
+    })
+  };
 
 
 
@@ -85,19 +106,26 @@ export const NewProductPage = () => {
           subCategory: '',
 
           sizes: [],
-          variant: [],
+          variants: [],
+          colors: [],
 
           raw_material_price: 0,
           percentage: 0,
           price: 0,
           profits: 0,
+          slug: '',
 
           id: ''
         }}
 
-        onSubmit={(Products) => {
+        onSubmit={(Products: Products) => {
+          Products.colors = colors
+          Products.sizes = sizes;
+          Products.variants = variants;
 
           Products.percentage = (Products.profits / Products.price) * 100
+
+          console.log(Products);
 
           createNewProduct(Products);
         }}
@@ -149,7 +177,7 @@ export const NewProductPage = () => {
                   />
                   {
                     sizes.map((s, i) => (
-                      <Chip sx={{ mt: 1, ml: 1  }} key={i} label={s} onDelete={() => handleDeleteSize(i)} />
+                      <Chip sx={{ mt: 1, ml: 1 }} key={i} label={s} onDelete={() => handleDeleteSize(i)} />
                     ))
                   }
                   <TextField
@@ -174,7 +202,32 @@ export const NewProductPage = () => {
                       <Chip variant='filled' sx={{ mt: 1, ml: 1 }} key={i} label={s} onDelete={() => handleDeleteVariant(i)} />
                     ))
                   }
+                  <TextField
+
+                    name='variant'
+                    margin='normal'
+                    label="Colores disponibles"
+                    fullWidth
+                    value={color}
+                    sx={{ mt: 2 }}
+                    onChange={e => setColor(e.target.value)}
+                    InputProps={{
+                      endAdornment: (
+                        <Button onClick={setColorFunc} variant='contained'>
+                          <AddIcon />
+                        </Button>
+                      )
+                    }}
+                  />
+                  {
+                    colors.map((s, i) => (
+                      <Chip variant='filled' sx={{ mt: 1, ml: 1 }} key={i} label={s} onDelete={() => handleDeleteVariant(i)} />
+                    ))
+                  }
                 </Grid>
+
+
+
 
                 <Grid item xs={12} sm={6}>
                   <MyTextInput label={"Ingrese el precio de venta"} name={"price"} type='number' />

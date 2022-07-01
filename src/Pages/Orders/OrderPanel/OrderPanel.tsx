@@ -28,12 +28,6 @@ export const OrderPanel = () => {
     navigate(-1);
   };
 
-
-
-
-
-
-
   return (
     <Grid container spacing={2} >
 

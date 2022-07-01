@@ -11,14 +11,15 @@ import { setModalOpen3 } from '../../../features/ui/ui.slice';
 import { useEffect } from 'react';
 import { startSelectOrder, startUpdateOrderStatus } from '../../../features/orders/orders.slice';
 
+import CheckIcon from '@mui/icons-material/Check';
+
 
 
 export const DetailOrder = () => {
 
+  const dispatch = useAppDispatch();
   const { orders, selected } = useAppSelector(state => state.orders);
 
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
 
   let statusButton: boolean = true;
@@ -32,23 +33,14 @@ export const DetailOrder = () => {
     statusButton = false
   };
   
-  const statusOf = {
-    pending: 0,
-    inProgress: 0,
-    finished: 0,
+
+  const handleFinishedOrder = () => {
+    dispatch( startUpdateOrderStatus(selected._id.toString(), 'finished') )
   };
-
-  selected.Order.map(e => {
-    e.status === 'pending' ? statusOf.pending += 1 : (e.status === 'in-progress' ? statusOf.inProgress += 1 : statusOf.finished += 1);
-  });
-
-  const handleClickPanelPage = () => {
-    navigate(`/ordenes/${selected._id}/panel`)
-  }
 
   const handleClickEnvoice = () => {
     EnvoicePage(selected)
-    console.log('guardando pdf')
+    console.log(selected);
   }
 
   const handleShipedOrder = () => {
@@ -62,11 +54,6 @@ export const DetailOrder = () => {
   }, [orders])
 
 
-  const tiposDeProductos:string[] = [];
-
-  selected.Order.map( order => console.log( order.product, order.slug ));
-
-
   return (
 
     <div>
@@ -74,7 +61,7 @@ export const DetailOrder = () => {
       <h1>Detalles</h1>
       <hr />
       <Grid container spacing={2} p={1}>
-        <Grid xs={12} sm={6}>
+        <Grid xs={12} sm={6.5}>
 
           <Card sx={{ padding: 2, margin: 2 }}>
 
@@ -82,7 +69,7 @@ export const DetailOrder = () => {
             <Typography variant='body1' ><strong>Cliente:</strong> {selected.Client}</Typography>
             <hr />
             <Typography variant='body1' ><strong>Total a Cobrar: $</strong> {new Intl.NumberFormat().format(selected.TotalPrice)}</Typography>
-            <Typography variant='body1' ><strong>Ganancia Total: $</strong> {new Intl.NumberFormat().format(selected.TotalProfit)}</Typography>
+            <Typography variant='body1' ><strong>Ganancia Total: $</strong> {new Intl.NumberFormat().format(selected.TotalProfits!)}</Typography>
             <Button disabled={selected.status !== 'shiped'} variant='text' color='warning' sx={{ padding: 0 }} onClick={() => dispatch(setModalOpen3(true))}>
               <Typography variant='body1' ><strong>Saldo: $</strong> {new Intl.NumberFormat().format(selected.dept)}</Typography>
             </Button>
@@ -106,33 +93,25 @@ export const DetailOrder = () => {
               />
             </Typography>
 
-
-
             <hr />
 
-            <Box display={'flex'} justifyContent='flex-end'>
+            <Box display={'flex'} justifyContent='space-between'>
 
-              <Button variant="contained" onClick={handleClickEnvoice} disabled={statusButton} color='success' startIcon={<PictureAsPdfIcon />}>
-                Imprimir Factura
+              <Button variant="contained" >
+                Imprimir helpers
               </Button>
 
-              {/* <Button variant="contained" color='warning' startIcon={<PictureAsPdfIcon />}>
-                Cancelar Orden
-              </Button> */}
+              <Button variant="contained" onClick={handleFinishedOrder} disabled={!statusButton} startIcon={<CheckIcon />} >
+                Finalizar Order
+              </Button>
+
+              <Button variant="contained" onClick={handleClickEnvoice}  color='success' startIcon={<PictureAsPdfIcon />}>
+                Imprimir Factura
+              </Button>
 
             </Box>
 
           </Card>
-
-        </Grid>
-
-        <Grid xs={12} sm={6}>
-
-          <Box display={'flex'} justifyContent={'space-between'} padding={2}>
-            <Typography variant='h5'>Estado actual del progreso</Typography>
-            <Button variant='contained' color='success' onClick={handleClickPanelPage}>Ir al Panel</Button>
-          </Box>
-          <MyPie title='Estado de la orden' values={statusOf} />
 
         </Grid>
 

@@ -23,3 +23,12 @@
 
   
 }
+
+.orden-contenedor{
+  max-height: 65vh;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

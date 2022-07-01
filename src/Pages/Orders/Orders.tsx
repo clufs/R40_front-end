@@ -102,7 +102,7 @@ export const Orders = () => {
                                   </Typography>
 
                                   <Typography sx={{ whiteSpace: "inherit" }} variant='h6'>
-                                    Ganancia: ${new Intl.NumberFormat().format(e.TotalProfit)}
+                                    Ganancia: ${new Intl.NumberFormat().format(e.TotalProfits!)}
                                   </Typography>
                                 </CardActions>
                                 <LinearProgress variant="determinate" value={100} />
@@ -142,7 +142,7 @@ export const Orders = () => {
                                   </Typography>
 
                                   <Typography sx={{ whiteSpace: "inherit" }} variant='h6'>
-                                    Ganancia: ${new Intl.NumberFormat().format(e.TotalProfit)}
+                                    Ganancia: ${new Intl.NumberFormat().format(e.TotalProfits!)}
                                   </Typography>
                                 </CardActions>
                                 <LinearProgress variant="determinate" value={100} />
@@ -159,7 +159,7 @@ export const Orders = () => {
               <TabPanel value="3">
                 <List sx={{ maxHeight: '65vh', overflow: 'scroll' }}>
                   {
-                    (ordenesTerminadas.length === 0)
+                    (ordenesEntregadas.length === 0)
                       ?
                       <h1>No hay ordenes Entregadas</h1>
                       :
@@ -181,7 +181,7 @@ export const Orders = () => {
                                   </Typography>
 
                                   <Typography sx={{ whiteSpace: "inherit" }} variant='h6'>
-                                    Ganancia: ${new Intl.NumberFormat().format(e.TotalProfit)}
+                                    Ganancia: ${new Intl.NumberFormat().format(e.TotalProfits!)}
                                   </Typography>
 
                                   {

@@ -3,8 +3,6 @@
 import { jsPDF } from "jspdf";
 
 
-
-
 export const EnvoicePage = (selected) => {
 
 
@@ -17,8 +15,7 @@ export const EnvoicePage = (selected) => {
       Cantidad: order.quantity.toString(),
       Talle: order.size.toString(),
       Descripcion: `${order.name} (${order.color}) ${order.variant}`,
-      Precio: `$ ${new Intl.NumberFormat().format(order.price).toString()}`,
-      Total: `$ ${new Intl.NumberFormat().format(order.subTotal).toString()}`
+
     })
   });
 
@@ -52,18 +49,11 @@ export const EnvoicePage = (selected) => {
       id: "Precio",
       name: "Precio",
       prompt: "Precio",
-      width: 30,
+      width: 60,
       align: "center",
       padding: '0'
     },
-    {
-      id: "Total",
-      name: "Total",
-      prompt: "Total",
-      width: 30,
-      align: "center",
-      padding: '0'
-    }
+
   ];
 
   const myLogo = './logoR40.png'

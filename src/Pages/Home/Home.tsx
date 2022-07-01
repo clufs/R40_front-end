@@ -21,7 +21,7 @@ export const Home = () => {
 
   orders.map(order => {
     totalPrice += order.TotalPrice
-    totalProfit += order.TotalProfit
+    totalProfit += order.TotalProfits!
     totalOrders += 1
     if (order.status === 'shiped') {
       totalOrdersShipped += 1

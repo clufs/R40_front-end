@@ -4,6 +4,7 @@ import { Order, StatusProps } from './interfaces';
 import { fetchConToken } from '../../Helpers/fetch';
 import { OrderProps1 } from "../../Pages/Orders/NewOrder";
 import Swal from "sweetalert2";
+import { OrderCartProps } from '../newOrder/newOrder.slice';
 
 
 
@@ -24,15 +25,15 @@ export const initialState: OrderProps = {
     _id: 0,
     Client: '',
     TotalPrice: 0,
-    TotalProfit: 0,
+    TotalProfits: 0,
     date: 0,
-    status: 'pending',
     dateFinish: 0,
+    
+    status: 'pending',
     dept: 0,
 
     period: ''
 
-    
   },
 };
 
@@ -66,7 +67,7 @@ export const orderSlice = createSlice({
   }
 });
 
-export const startNewOrder = (order: OrderProps1): AppThunk => {
+export const startNewOrder = (order: OrderCartProps): AppThunk => {
 
 
   return async (dispatch) => {
