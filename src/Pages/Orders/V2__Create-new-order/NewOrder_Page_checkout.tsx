@@ -7,13 +7,14 @@ import { startNewOrder } from '../../../features/orders/orders.slice';
 import { useNavigate } from 'react-router-dom';
 import { setEmptyCart } from '../../../features/newOrder/cartOrder.slice';
 
-let t: number = 0;
-let pr: number = 0;
+
 
 export const NewOrder_Page_checkout = () => {
+  let t: number = 0;
+  let pr: number = 0;
 
   const dispatch = useAppDispatch();
-  const navigate= useNavigate();
+  const navigate = useNavigate();
 
   const { cart } = useAppSelector(e => e.newOrder);
   const { clients } = useAppSelector(e => e.clients);
@@ -22,6 +23,7 @@ export const NewOrder_Page_checkout = () => {
 
 
   const total = useMemo(() => cart.map(p => {
+
     t += p.price * p.quantity!
     return t
   }), [cart]);
@@ -44,7 +46,7 @@ export const NewOrder_Page_checkout = () => {
     dept: 0
   };
 
-  const anashe = async() => {
+  const anashe = async () => {
     dispatch(startNewOrder(toSend));
     navigate('/ordenes');
     dispatch(setEmptyCart());
