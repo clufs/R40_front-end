@@ -8,7 +8,7 @@ import { ArrayAvalibleSubCategories, ArrayAvalibleProducts, getOneProduct } from
 
 export const Category__Select = () => {
 
-  const { category } = useAppSelector(state => state.avalible)
+  const { category, subCategory  } = useAppSelector(state => state.avalible)
   const { products } = useAppSelector(state => state.products)
   const dispatch = useAppDispatch()
 
@@ -17,7 +17,9 @@ export const Category__Select = () => {
   const handleClickCategory = (category: string) => {
     dispatch(setCategory(category));
     dispatch(ArrayAvalibleSubCategories(products, category));
-    dispatch(setCountStep(stepCount - 2));
+    dispatch(setCountStep(stepCount - 1));
+    dispatch(ArrayAvalibleProducts(products, category));
+
     nextStep();
   };
 
@@ -61,7 +63,7 @@ export const SubCategory__Select = () => {
   const handleClicSubCategory = (subCategory: string) => {
     dispatch(setSubcategory(subCategory));
     dispatch(setCountStep(stepCount - 1));
-    dispatch(ArrayAvalibleProducts(products, subCategory, category));
+    dispatch(ArrayAvalibleProducts(products, category));
     nextStep();
   };
 
@@ -113,7 +115,7 @@ export const Product__Select = () => {
 
   const handleClicSubCategory = (theProduct: string) => {
     dispatch(setProduct(theProduct));
-    dispatch(setCountStep(stepCount - 1));
+    dispatch(setCountStep(stepCount-2));
     dispatch(getOneProduct(products, category, subcategory, theProduct));
     navigate('/productos/producto');
   };

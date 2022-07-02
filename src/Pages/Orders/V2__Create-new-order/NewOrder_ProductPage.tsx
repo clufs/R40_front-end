@@ -107,7 +107,7 @@ export const NewOrder_ProductPage = () => {
             <Typography variant='body1'>Cantidad:</Typography>
 
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <ItemCounter currentValue={tempProductCart.quantity} maxValue={100} updateQuantity={(newValue) => onUpdateQuantity(newValue)} />
+              <ItemCounter currentValue={tempProductCart.quantity} maxValue={1000} updateQuantity={(newValue) => onUpdateQuantity(newValue)} />
               <Box >
                 <Paper elevation={3} sx={{ padding: 1 }}>
                   <Typography variant='overline'>SubTotal</Typography>

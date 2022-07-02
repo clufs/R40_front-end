@@ -38,7 +38,7 @@ export const Navbar = () => {
           <NavLink className= 'menu-item' to='/productos'><i className="bi bi-box2-fill"></i> Productos</NavLink>
           <NavLink className= 'menu-item' to='/ordenes'><i className="bi bi-card-checklist"></i> Ordenes</NavLink>
           <NavLink className= 'menu-item' to='/clientes'><i className="bi bi-person-fill"></i> Clientes</NavLink>
-          <NavLink className= 'menu-item' to='/resumen'><i className="bi bi-file-text-fill"></i> Resumen</NavLink>
+          {/* <NavLink className= 'menu-item' to='/resumen'><i  className="bi bi-file-text-fill"></i> Resumen</NavLink> */}
           <hr />
 
 

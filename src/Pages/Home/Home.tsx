@@ -60,7 +60,7 @@ export const Home = () => {
           <div className="col-md-4 col-xl-3">
             <div className="card bg-c-yellow order-card">
               <div className="card-block">
-                <h6 className="m-b-20">Ordenes Recividas:</h6>
+                <h6 className="m-b-20">Ordenes Recibidas:</h6>
                 <h2 className="text-right"><i className="bi bi-archive"></i><span>{totalOrders}</span></h2>
                 <p className="m-b-0">Ordenes del mes:<span className="f-right"> --- </span></p>
               </div>

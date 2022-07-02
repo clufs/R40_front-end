@@ -5,7 +5,6 @@ import { useAppSelector } from "../../Redux/hooks";
 
 const steps = [
   'Seleccione una categoria.',
-  'Seleccione una sub-categoria.',
   'Seleccione un producto.',
 ];
 

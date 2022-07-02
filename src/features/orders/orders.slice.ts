@@ -64,6 +64,8 @@ export const orderSlice = createSlice({
         selected: action.payload
       }
     }
+
+    
   }
 });
 
@@ -87,6 +89,7 @@ export const startNewOrder = (order: OrderCartProps): AppThunk => {
           timerProgressBar: true,
         });
         dispatch(startGetAllOrders());
+        return true
       } else {
         console.log('mierda');
         Swal.fire({
@@ -98,10 +101,12 @@ export const startNewOrder = (order: OrderCartProps): AppThunk => {
           showConfirmButton: true,
           timerProgressBar: true,
         });
+        return false
       }
 
     } catch (error) {
       console.log(error)
+      return false
     }
 
   }

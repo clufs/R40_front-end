@@ -38,6 +38,13 @@ export const cartOrderSlice = createSlice({
         ...state,
         cart: action.payload
       }
+    },
+
+    setEmptyCart(state){
+      return{
+        ...state,
+        cart: []
+      }
     }
   },
 });
@@ -81,6 +88,6 @@ export const deleteToCart = (index: number, cart: OrderItems2[]): AppThunk => {
   }
 }
 
-export const { selectedProdToCart, addProductsToCart, deleteProductToCart } =
+export const { selectedProdToCart, addProductsToCart, deleteProductToCart, setEmptyCart } =
   cartOrderSlice.actions;
 export default cartOrderSlice.reducer;

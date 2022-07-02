@@ -1,4 +1,4 @@
-import { Grid, Card, Typography, Button, Box, Checkbox, FormControlLabel, Divider } from '@mui/material';
+import { Grid, Card, Typography, Button, Box, Checkbox, FormControlLabel, Divider, Chip, IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { dateFunction } from '../../../Helpers';
 import { useAppSelector, useAppDispatch } from '../../../Redux/hooks';
 import { MyPie } from '../../../Components/charts/MyPie';
@@ -27,15 +27,15 @@ export const DetailOrder = () => {
   let status: statusType = 'Pendiente';
 
 
-  (selected.status === 'pending') ? (status = 'Pendiente') : (selected.status === 'in-progress' ? status = 'En progreso' : (selected.status === 'finished' ? status = 'Listo para Entregar' : status = 'Entregado' ));
-  
+  (selected.status === 'pending') ? (status = 'Pendiente') : (selected.status === 'in-progress' ? status = 'En progreso' : (selected.status === 'finished' ? status = 'Listo para Entregar' : status = 'Entregado'));
+
   if (status === 'Listo para Entregar' || status === 'Entregado') {
     statusButton = false
   };
-  
+
 
   const handleFinishedOrder = () => {
-    dispatch( startUpdateOrderStatus(selected._id.toString(), 'finished') )
+    dispatch(startUpdateOrderStatus(selected._id.toString(), 'finished'))
   };
 
   const handleClickEnvoice = () => {
@@ -61,7 +61,7 @@ export const DetailOrder = () => {
       <h1>Detalles</h1>
       <hr />
       <Grid container spacing={2} p={1}>
-        <Grid xs={12} sm={6.5}>
+        <Grid xs={12} sm={6}>
 
           <Card sx={{ padding: 2, margin: 2 }}>
 
@@ -85,7 +85,7 @@ export const DetailOrder = () => {
             <Typography variant='body1' >
               <strong>Entregado: </strong>
               <FormControlLabel
-                checked={ selected.status === 'shiped'}
+                checked={selected.status === 'shiped'}
                 control={<Checkbox />}
                 disabled={statusButton}
                 onChange={handleShipedOrder}
@@ -97,15 +97,11 @@ export const DetailOrder = () => {
 
             <Box display={'flex'} justifyContent='space-between'>
 
-              <Button variant="contained" >
-                Imprimir helpers
+              <Button variant="contained" onClick={handleFinishedOrder} color='success' disabled={!statusButton} startIcon={<CheckIcon />} >
+                Orden lista para entregar
               </Button>
 
-              <Button variant="contained" onClick={handleFinishedOrder} disabled={!statusButton} startIcon={<CheckIcon />} >
-                Finalizar Order
-              </Button>
-
-              <Button variant="contained" onClick={handleClickEnvoice}  color='success' startIcon={<PictureAsPdfIcon />}>
+              <Button variant="contained" onClick={handleClickEnvoice} color='inherit' startIcon={<PictureAsPdfIcon />}>
                 Imprimir Factura
               </Button>
 
@@ -113,6 +109,44 @@ export const DetailOrder = () => {
 
           </Card>
 
+        </Grid>
+
+        <Grid xs={12} sm={6}>
+          <Paper sx={{ marginLeft: 2, overflow: 'scroll', maxHeight: 'calc(100vh - 160px)' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Typography variant='h6'>Orden</Typography>
+            </Box>
+            <br />
+            <Table>
+              <TableHead >
+                <TableRow>
+                  <TableCell align="center">Cantidad</TableCell>
+                  <TableCell align="center">Talle</TableCell>
+                  <TableCell align="center">Producto</TableCell>
+                  <TableCell align="center">Color</TableCell>
+                  <TableCell align="center">Variante</TableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                {selected.orders!.map((cartItem, id) => (
+                  <TableRow
+                    key={id}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+
+                    <TableCell align="center">{cartItem.quantity}</TableCell>
+                    <TableCell align="center">{cartItem.size} </TableCell>
+                    <TableCell align="center"><Chip label={cartItem.name} /></TableCell>
+                    <TableCell align="center">{cartItem.color}</TableCell>
+
+                    <TableCell align="center">{cartItem.variant}</TableCell>
+
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Paper>
         </Grid>
 
       </Grid>

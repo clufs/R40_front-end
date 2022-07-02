@@ -16,7 +16,7 @@ export const EnvoicePage = (selected) => {
     data.push({
       Cantidad: order.quantity.toString(),
       Talle: order.size.toString(),
-      Descripcion: `${order.name} (${order.color}) ${order.variant}`,
+      Descripcion: `${order.name} / ${order.color} / ${order.variant}`,
       Precio: `$ ${new Intl.NumberFormat().format(order.price).toString()}`,
       Total: `$ ${new Intl.NumberFormat().format(order.subTotal).toString()}`
     })

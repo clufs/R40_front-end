@@ -2,6 +2,7 @@
 
 
 export interface Order{
+  orders?: OrderItems[];
   Order: OrderItems[]
   _id: number,
 
@@ -20,6 +21,10 @@ export interface Order{
 }
 
 export interface OrderItems{
+  quantity?: number;
+  name?: string;
+  variant?: string;
+  color?: string;
   cant: number;
   size: number;
   product: string;

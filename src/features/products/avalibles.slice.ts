@@ -101,11 +101,11 @@ export const ArrayAvalibleSubCategories = (products: Products[], category: strin
   }
 };
 
-export const ArrayAvalibleProducts = (products: Products[], subCategory: string, category: string): AppThunk => {
+export const ArrayAvalibleProducts = (products: Products[],  category: string): AppThunk => {
   return async (dispatch) => {
     try {
       const productsAvalible: string[] = [];
-      const arrayProducts = products.filter((e) => e.subCategory === subCategory && e.category === category);
+      const arrayProducts = products.filter((e) => e.category === category);
 
       arrayProducts.map((product) => {
         productsAvalible.push(product.name)

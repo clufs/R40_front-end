@@ -14,7 +14,7 @@ export const SelectProductPage = () => {
       <Grid container spacing={2} paddingTop={2}>
         <Wizard header={<MyStepper />}> 
           <Category__Select />
-          <SubCategory__Select />
+          {/* <SubCategory__Select /> */}
           <Product__Select />
         </Wizard>
       </Grid>

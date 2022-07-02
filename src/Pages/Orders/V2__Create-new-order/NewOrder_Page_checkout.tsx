@@ -5,6 +5,7 @@ import { useState, useMemo } from 'react';
 import { setDateFormat } from '../../../Helpers/dateFunctions';
 import { startNewOrder } from '../../../features/orders/orders.slice';
 import { useNavigate } from 'react-router-dom';
+import { setEmptyCart } from '../../../features/newOrder/cartOrder.slice';
 
 let t: number = 0;
 let pr: number = 0;
@@ -43,9 +44,10 @@ export const NewOrder_Page_checkout = () => {
     dept: 0
   };
 
-  const anashe = () => {
-    console.log(toSend);
+  const anashe = async() => {
     dispatch(startNewOrder(toSend));
+    navigate('/ordenes');
+    dispatch(setEmptyCart());
   };
 
 
