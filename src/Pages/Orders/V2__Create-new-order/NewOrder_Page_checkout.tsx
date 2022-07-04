@@ -9,12 +9,15 @@ import { setEmptyCart } from '../../../features/newOrder/cartOrder.slice';
 
 
 
-export const NewOrder_Page_checkout = () => {
-  let t: number = 0;
-  let pr: number = 0;
 
+
+export const NewOrder_Page_checkout = () => {
+  
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  
+  let t: number = 0;
+  let pr: number = 0;
 
   const { cart } = useAppSelector(e => e.newOrder);
   const { clients } = useAppSelector(e => e.clients);
@@ -22,16 +25,19 @@ export const NewOrder_Page_checkout = () => {
   const [values, setValues] = useState<any>()
 
 
-  const total = useMemo(() => cart.map(p => {
+  const total = useMemo(() => {
+    cart.map(p => {
+      t += p.price * p.quantity!
+    })
+    return (t);
+  }, []);
 
-    t += p.price * p.quantity!
-    return t
-  }), [cart]);
-
-  const profit = useMemo(() => cart.map(p => {
-    pr += p.profits * p.quantity!
+  const profit = useMemo(() => {
+    cart.map(p => {
+      pr += p.profits * p.quantity!
+    })
     return pr
-  }), [cart])
+  }, [cart])
 
 
 
@@ -41,8 +47,8 @@ export const NewOrder_Page_checkout = () => {
     date: Date.now(),
     status: 'pending',
     period: setDateFormat(Date.now()),
-    TotalPrice: t,
-    TotalProfits: pr,
+    TotalPrice: total,
+    TotalProfits: profit,
     dept: 0
   };
 
@@ -68,10 +74,10 @@ export const NewOrder_Page_checkout = () => {
           <Typography variant='h4'>Resumen de orden</Typography>
           <hr />
           <Typography variant='inherit'>Total:</Typography>
-          <Typography variant='h4'>${t}</Typography>
+          <Typography variant='h4'>${total}</Typography>
 
           <Typography variant='inherit'>Ganancia Total:</Typography>
-          <Typography variant='h4'>${pr}</Typography>
+          <Typography variant='h4'>${profit}</Typography>
 
           <Box mt={2}>
             <InputLabel>Cliente</InputLabel>
