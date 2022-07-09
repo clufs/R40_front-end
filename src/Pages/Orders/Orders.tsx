@@ -20,8 +20,8 @@ export const Orders = () => {
   
   
   const { orders } = useAppSelector(e => e.orders)
-  console.log(courrentPeriod);
-  console.log(orders.map( e => e.period));
+  // console.log(courrentPeriod);
+  // console.log(orders.map( e => e.period));
 
   let ordenesPendientes: Order[] = [];
   let ordenesTerminadas: Order[] = [];
@@ -33,7 +33,7 @@ export const Orders = () => {
   (orders !== []) ? ordenesTerminadas = orders.filter(e => ((e.period === courrentPeriod) && (e.status === 'finished')) ) : ordenesTerminadas = [];
   (orders !== []) ? ordenesEntregadas = orders.filter(e => ((e.period === courrentPeriod) && (e.status === 'shiped')) ) : ordenesEntregadas = [];
 
-  console.log( ordenesEntregadas );
+  // console.log( ordenesEntregadas );
 
   useEffect(() => {
     dispatch(startGetAllOrders())
@@ -65,10 +65,10 @@ export const Orders = () => {
       <h1>Ordenes</h1>
       <hr />
 
-      <Grid container spacing={2} p={1}>
-        <Grid xs={12} sm={7} m={1}>
+      <Grid container>
+        <Grid item xs={12} sm={8} >
 
-          <Box sx={{ width: '100%', typography: 'body1' }}>
+          <Box sx={{ width: '100%'}}>
             <TabContext value={value}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <TabList onChange={handleChange} aria-label="lab API tabs example">
@@ -216,7 +216,7 @@ export const Orders = () => {
 
         </Grid>
 
-        <Grid xs={12} sm={4} m={1} >
+        <Grid xs={12} sm={4}  >
           <Card sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
             <Button variant='contained' color="success" onClick={handleClickNewOrderPage}>Generar nueva orden</Button>
             <Button variant='contained' color="info" sx={{ marginTop: 1 }}>Ver todas las Ordenes</Button>

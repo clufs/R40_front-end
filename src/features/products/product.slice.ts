@@ -37,7 +37,7 @@ export const startGetAllProducts = (): AppThunk => {
       const res = await fetchConToken('products');
       const { products } = await res.json();
 
-      console.log(products);
+      // console.log(products);
 
       if( products !== undefined) {
 
@@ -76,7 +76,7 @@ export const startAddNewProduct = (props: Products): AppThunk => {
     try {
       const res = await fetchConToken('products', props, 'POST');
       const body = await res.json()
-      console.log(body);
+      // console.log(body);
 
 
       if (body.ok) {
@@ -120,7 +120,7 @@ export const startUpdatePrice = (id: string, price: number, profits:number, perc
     try {
       const res = await fetchConToken(`products/${id}`, { price, profits, percentage }, 'PUT');
       const body = await res.json()
-      console.log(body.productUpdate);
+      // console.log(body.productUpdate);
 
       if (body.ok) {
         Swal.fire({
@@ -161,7 +161,7 @@ export const startUpdateRawMaterialPrice = (id: string, raw_material_price: numb
       const res =  await fetchConToken(`products/${id}`, { raw_material_price, profits, percentage }, 'PUT');
       const body = await res.json();
 
-      console.log(body.productUpdate);
+      // console.log(body.productUpdate);
 
       if (body.ok) {
         Swal.fire({

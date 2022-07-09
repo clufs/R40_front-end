@@ -5,6 +5,7 @@ import { fetchConToken } from '../../Helpers/fetch';
 import { OrderProps1 } from "../../Pages/Orders/NewOrder";
 import Swal from "sweetalert2";
 import { OrderCartProps } from '../newOrder/newOrder.slice';
+import { NavigateFunction } from "react-router-dom";
 
 
 
@@ -77,7 +78,7 @@ export const startNewOrder = (order: OrderCartProps): AppThunk => {
       const res = await fetchConToken('orders/new', order, 'POST');
       const body = await res.json();
 
-      console.log(body);
+      // console.log(body);
       if (body.ok) {
         Swal.fire({
           icon: 'success',
@@ -117,9 +118,9 @@ export const startNewOrder = (order: OrderCartProps): AppThunk => {
 
 export const startUpdateOrderItemStatus = (_id: number, status: StatusProps, idOrderItem: string): AppThunk => {
   return async (dispatch) => {
-    console.log('se ingreso en el slice')
+    // console.log('se ingreso en el slice')
     try {
-      console.log('se ingreso en el try')
+      // console.log('se ingreso en el try')
       const res = await fetchConToken('orders/update-status-order_item', { _id, status, idOrderItem }, 'POST');
       const body = await res.json();
 
@@ -145,7 +146,7 @@ export const startUpdateOrderStatus = (_id: string, status: StatusProps):AppThun
       const body = await res.json();
 
       if (body.ok) {
-        console.log(body)
+        // console.log(body)
         dispatch(refreshOrdersStatus(body.order));
         dispatch(startGetAllOrders())
 
@@ -197,7 +198,7 @@ export const startUpdate__dept = ( id: string, dept: number): AppThunk => {
     const body = await res.json();
 
 
-    console.log( body.order )
+    // console.log( body.order )
 
     if (body.ok) {
       Swal.fire({
@@ -228,6 +229,20 @@ export const startUpdate__dept = ( id: string, dept: number): AppThunk => {
 
 }
 
+
+export const startDeleteOrder = (_id: number, navigate: NavigateFunction ):AppThunk => {
+  //* idOrder = 62c874d9f698d1251d3ae851
+
+  return async (dispatch) => {
+    const res = await fetchConToken(`orders/remove`,  {_id} , 'POST');
+    const body = await res.json();
+
+    if(body.ok){
+      navigate(-1);
+    }
+  }
+
+};
 
 
 

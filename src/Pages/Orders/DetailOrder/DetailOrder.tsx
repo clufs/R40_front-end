@@ -9,9 +9,11 @@ import { EnvoicePage } from '../OrderPanel/components/Envoice/EnvoicePage';
 import { BasicModal_3 } from '../../../Components/modals/Modals';
 import { setModalOpen3 } from '../../../features/ui/ui.slice';
 import { useEffect } from 'react';
-import { startSelectOrder, startUpdateOrderStatus } from '../../../features/orders/orders.slice';
+import { startDeleteOrder, startSelectOrder, startUpdateOrderStatus } from '../../../features/orders/orders.slice';
 
 import CheckIcon from '@mui/icons-material/Check';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Swal from 'sweetalert2';
 
 
 
@@ -19,6 +21,7 @@ export const DetailOrder = () => {
 
   const dispatch = useAppDispatch();
   const { orders, selected } = useAppSelector(state => state.orders);
+  const navigate = useNavigate();
 
 
 
@@ -47,12 +50,38 @@ export const DetailOrder = () => {
     dispatch(startUpdateOrderStatus(selected._id.toString(), 'shiped'))
   }
 
+
+
   useEffect(() => {
 
     dispatch(startSelectOrder(orders, selected._id))
 
   }, [orders])
 
+
+
+  const onDelete = () => {
+    Swal.fire({
+      icon: 'question',
+      title: 'Esta seguro de elimnar la orden?',
+      showCancelButton: true,
+      position: 'center',
+      showConfirmButton: true,
+      confirmButtonText: 'Si, quiero borrar la orden!',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Swal.fire(
+          
+        // )
+        dispatch(startDeleteOrder(selected._id, navigate));
+
+      } 
+    })
+
+    // });
+  }
 
   return (
 
@@ -62,6 +91,12 @@ export const DetailOrder = () => {
       <hr />
       <Grid container spacing={2} p={1}>
         <Grid xs={12} sm={6}>
+
+          <Box display={'flex'} alignItems='center' justifyContent='center'>
+            <IconButton aria-label="delete" color='error' onClick={onDelete}>
+              <DeleteIcon />
+            </IconButton>
+          </Box>
 
           <Card sx={{ padding: 2, margin: 2 }}>
 
@@ -101,13 +136,16 @@ export const DetailOrder = () => {
                 Orden lista para entregar
               </Button>
 
+
               <Button variant="contained" onClick={handleClickEnvoice} color='inherit' startIcon={<PictureAsPdfIcon />}>
                 Imprimir Factura
               </Button>
 
+
             </Box>
 
           </Card>
+
 
         </Grid>
 

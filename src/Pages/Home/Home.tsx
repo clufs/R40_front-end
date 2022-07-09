@@ -5,8 +5,18 @@ import { useAppDispatch, useAppSelector } from '../../Redux/hooks';
 
 import './Styles.css'
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import { fetchConToken } from '../../Helpers/fetch';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { ConstructionOutlined } from '@mui/icons-material';
 
 export const Home = () => {
+
+  const [dolar, setDolar] = useState({
+    compra: '',
+    venta: '',
+    fecha: '',
+  })
 
   const { name, uid } = useAppSelector((state) => state.auth)
   const dispatch = useAppDispatch()
@@ -17,6 +27,21 @@ export const Home = () => {
   let totalProfit: number = 0;
   let totalOrders: number = 0;
   let totalOrdersShipped: number = 0;
+
+  
+
+
+  const anashe = async() => {
+    const {data} =  await axios.get('https://cors-solucion.herokuapp.com/https://api-dolar-argentina.herokuapp.com/api/dolarblue')
+    setDolar(data);
+  }
+
+  useEffect(() => {
+    anashe()
+  }, [])
+
+  
+    
 
 
   orders.map(order => {
@@ -73,6 +98,17 @@ export const Home = () => {
                 <h6 className="m-b-20">Ordenes Actuales</h6>
                 <h2 className="text-right"><i className="bi bi-archive"></i><span> --- </span></h2>
                 <p className="m-b-0">Ordenes Terminadas<span className="f-right"> --- </span></p>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-6 col-xl-6">
+            <div className="card bg-c-dolar order-card">
+              <div className="card-block">
+                <h6 className="m-b-20">Dolar Blue:</h6>
+                <h4 className="text-right">Compra:<strong> ${dolar.compra}</strong></h4>
+                <h4 className="text-right">Venta:<strong> ${dolar.venta}</strong></h4>
+                <p className="m-b-0"><span className="f-right"> {dolar.fecha} </span></p>
               </div>
             </div>
           </div>

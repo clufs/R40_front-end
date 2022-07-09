@@ -9,8 +9,6 @@ import { setEmptyCart } from '../../../features/newOrder/cartOrder.slice';
 
 
 
-
-
 export const NewOrder_Page_checkout = () => {
   
   const dispatch = useAppDispatch();
@@ -25,6 +23,7 @@ export const NewOrder_Page_checkout = () => {
   const [values, setValues] = useState<any>()
 
 
+
   const total = useMemo(() => {
     cart.map(p => {
       t += p.price * p.quantity!
@@ -37,7 +36,7 @@ export const NewOrder_Page_checkout = () => {
       pr += p.profits * p.quantity!
     })
     return pr
-  }, [cart])
+  }, [cart]);
 
 
 
@@ -51,7 +50,7 @@ export const NewOrder_Page_checkout = () => {
     TotalProfits: profit,
     dept: 0
   };
-
+  
   const anashe = async () => {
     dispatch(startNewOrder(toSend));
     navigate('/ordenes');
@@ -88,8 +87,8 @@ export const NewOrder_Page_checkout = () => {
               onChange={(e) => setValues(e.target.value)}
             >
               {
-                clients.map(cl => (
-                  <MenuItem value={cl.name}>{cl.name}</MenuItem>
+                clients.map(client => (
+                  <MenuItem value={client.name}>{client.name}</MenuItem>
                 ))
               }
             </Select>

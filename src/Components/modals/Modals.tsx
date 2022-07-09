@@ -222,4 +222,4 @@ export const BasicModal_3 = () => {
       </Modal>
     </div >
   );
-}
+};
