@@ -1,7 +1,7 @@
 import { AddCircleOutline, RemoveCircleOutline } from "@mui/icons-material"
-import { IconButton, Typography } from '@mui/material';
+import { IconButton, Input, TextField, Typography } from '@mui/material';
 import { Box } from "@mui/system"
-import { FC } from "react"
+import { FC, useState } from "react"
 
 interface Props {
   currentValue: number;
@@ -13,6 +13,20 @@ interface Props {
 
 export const ItemCounter: FC<Props> = ({currentValue, maxValue, updateQuantity}) => {
 
+  const [value, setValue] = useState<number>();
+
+  const setinho = (a: string) => {
+
+    // console.log(a);
+
+    // setValue(Number(a));
+    // currentValue = value!;
+    updateQuantity(Number(a));
+    // setValue(currentValue);
+    
+
+  };
+
   const addOrRemove = (value: number) => {
     if(value === -1){
       if (currentValue === 1) return;
@@ -22,20 +36,24 @@ export const ItemCounter: FC<Props> = ({currentValue, maxValue, updateQuantity})
     if( currentValue >= maxValue) return;
 
     updateQuantity(currentValue + 1);
-    
-  }
+  };
+
+
 
   return (
-    <Box display='flex' alignItems='center'>
-      <IconButton onClick={ () => addOrRemove(-1) }>
-        <RemoveCircleOutline />
-      </IconButton>
+    // <Box display='flex' alignItems='center'>
+    //   <IconButton onClick={ () => addOrRemove(-1) }>
+    //     <RemoveCircleOutline />
+    //   </IconButton>
 
-      <Typography sx={{ width: 40, textAlign: 'center' }}> {currentValue} </Typography>
+    //   <TextField value={currentValue} onChange={e => setinho(e.target.value)} sx={{ width:100, textAlign: 'center' }}></TextField>
 
-      <IconButton onClick={ () => addOrRemove(+1) }>
-        <AddCircleOutline />
-      </IconButton>
-    </Box>
+    //   <IconButton onClick={ () => addOrRemove(+1) }>
+    //     <AddCircleOutline />
+    //   </IconButton>
+    // </Box>
+
+    <TextField type='text' label={<Typography variant='h5'>Cantidad</Typography>} value={currentValue} onChange={({target}) => setinho(target.value) } />
+
   )
 }
