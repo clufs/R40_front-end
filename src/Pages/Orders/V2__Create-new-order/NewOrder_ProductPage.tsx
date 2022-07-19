@@ -22,6 +22,8 @@ export interface ItemCartProps {
   profit: number;
   quantity: number;
 
+  statusOfStock: 'out-Stock' | 'in-Stock'
+
 }
 
 export const NewOrder_ProductPage = () => {
@@ -45,6 +47,7 @@ export const NewOrder_ProductPage = () => {
     profit: 0,
 
     quantity: 1,
+    statusOfStock: 'out-Stock'
   });
 
 

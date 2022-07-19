@@ -1,4 +1,4 @@
-import { Grid, Card, Typography, Button, Box, Checkbox, FormControlLabel, Divider, Chip, IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { Grid, Card, Typography, Button, Box, Checkbox, FormControlLabel, Divider, Chip, IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow, Link } from '@mui/material';
 import { dateFunction } from '../../../Helpers';
 import { useAppSelector, useAppDispatch } from '../../../Redux/hooks';
 import { MyPie } from '../../../Components/charts/MyPie';
@@ -151,8 +151,9 @@ export const DetailOrder = () => {
 
         <Grid xs={12} sm={6}>
           <Paper sx={{ marginLeft: 2, overflow: 'scroll', maxHeight: 'calc(100vh - 160px)' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              <Typography variant='h6'>Orden</Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between'}}>
+              <Typography variant='h5' marginLeft={2}>Orden</Typography> 
+              <Button variant='contained' onClick={() => navigate(`/ordenes/${selected._id}/stock-check`)}>Realizar conteo de stock </Button>
             </Box>
             <br />
             <Table>

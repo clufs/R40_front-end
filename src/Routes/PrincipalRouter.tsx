@@ -25,6 +25,7 @@ import { NewOrder_V2 } from '../Pages/Orders/V2__Create-new-order/NewOrder_V2';
 // import { NewOrder } from "../Pages/Orders/NewOrder";
 import { NewOrder_ProductPage } from '../Pages/Orders/V2__Create-new-order/NewOrder_ProductPage';
 import { NewOrder_Page_checkout } from '../Pages/Orders/V2__Create-new-order/NewOrder_Page_checkout';
+import { CheckItems_Page } from "../Pages/Orders/itemsToBuy/CheckItems_Page";
 
 export const PrincipalRouter = () => {
 
@@ -56,10 +57,13 @@ export const PrincipalRouter = () => {
           <Route path="/ordenes/nueva" element={<NewOrder_V2 />} />
           <Route path='/ordenes/nueva/prodToAdd' element={<NewOrder_ProductPage />} />
           <Route path='/ordenes/nueva/checkout' element={<NewOrder_Page_checkout />} />
+          
+
 
 
 
           <Route path="/ordenes/:id" element={<DetailOrder />} />
+          <Route path="/ordenes/:id/stock-check" element={<CheckItems_Page />} />
           <Route path="/ordenes/:id/panel" element={<OrderPanel />} />
           {/* <Route path="/ordenes/:id/invoice" element={<EnvoicePage />} /> */}
 

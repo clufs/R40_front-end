@@ -24,7 +24,7 @@ export const NewOrder_V2 = () => {
 
 
   const handleClickProductAdd = (prodId: string) => {
-    console.log(prodId);
+    // console.log(prodId);
     dispatch(SelectProductToOrder(products, prodId));
     navigate('/ordenes/nueva/prodToAdd')
   };

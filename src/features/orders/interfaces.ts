@@ -31,6 +31,7 @@ export interface OrderItems{
   price: number;
   subTotalPrice: number;
   profit: number;
+  statusOfStock?: string;
 
   status: StatusProps;
   slug?: string;
