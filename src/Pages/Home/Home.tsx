@@ -1,13 +1,12 @@
-import { CardHeader, CardContent, Typography, Divider } from '@mui/material';
+import { Typography, Divider } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks';
 
 
 import './Styles.css'
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import { fetchConToken } from '../../Helpers/fetch';
+
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { ConstructionOutlined } from '@mui/icons-material';
+
 import { setDateFormat } from '../../Helpers/dateFunctions';
 
 export const Home = () => {
@@ -18,8 +17,6 @@ export const Home = () => {
     fecha: '',
   })
 
-  const { name, uid } = useAppSelector((state) => state.auth)
-  const dispatch = useAppDispatch()
 
   const { orders } = useAppSelector((state) => state.orders)
 
@@ -32,6 +29,8 @@ export const Home = () => {
   let totalIngresosPaidOrders: number = 0;
   let shiped_totalOrders: number = 0;
   let order_toShiped: number = 0;
+
+  let totalOrder_CurrentPeriod: number = 0;
 
   let totalDebt: number = 0;
   let totalOrdersWhitDebt: number = 0;
@@ -67,6 +66,10 @@ export const Home = () => {
       totalProfit += order.TotalProfits!
     }
 
+    if( order.period === courrentPeriod && order.status === 'shiped'){
+      totalOrder_CurrentPeriod += 1;
+    }
+
     if (order.status === 'shiped' && order.period === courrentPeriod) {
       totalIngresosPaidOrders += order.TotalPrice - order.dept;
       totalPaidOrders += order.TotalProfits!;
@@ -81,6 +84,8 @@ export const Home = () => {
       order_toShiped += 1;
     }
   });
+
+
 
 
 
@@ -152,7 +157,7 @@ export const Home = () => {
             <div className="card bg-c-yellow order-card">
               <div className="card-block">
                 <h6 className="m-b-20">Ordenes Recibidas:</h6>
-                <h2 className="text-right"><i className="bi bi-archive"></i><span>{totalOrders}</span></h2>
+                <h2 className="text-right"><i className="bi bi-archive"></i><span>{totalOrder_CurrentPeriod}</span></h2>
               </div>
             </div>
           </div>
