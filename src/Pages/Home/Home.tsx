@@ -66,7 +66,7 @@ export const Home = () => {
       totalProfit += order.TotalProfits!
     }
 
-    if( order.period === courrentPeriod && order.status === 'shiped'){
+    if( order.period === courrentPeriod ){
       totalOrder_CurrentPeriod += 1;
     }
 
