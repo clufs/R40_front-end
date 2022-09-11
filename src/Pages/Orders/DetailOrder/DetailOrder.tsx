@@ -110,6 +110,10 @@ export const DetailOrder = () => {
             </Button>
 
             <hr />
+            <Typography variant='body1' ><strong>Ganancia Ruben (23%): $</strong> {new Intl.NumberFormat().format(selected.TotalProfits! * .23)}</Typography>
+            <Typography variant='body1' ><strong>Ganancia Claudia (23%): $</strong> {new Intl.NumberFormat().format(selected.TotalProfits! * .23)}</Typography>
+            <Typography variant='body1' ><strong>Ganancia Nahuel (53%): $</strong> {new Intl.NumberFormat().format(selected.TotalProfits! * .53)}</Typography>
+            <hr />
 
             <Typography variant='body1' ><strong>Fecha de Creacion:</strong> {dateFunction.getFormatDistanceToNow(selected.date)}</Typography>
 

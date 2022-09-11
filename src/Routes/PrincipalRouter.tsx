@@ -26,6 +26,7 @@ import { NewOrder_V2 } from '../Pages/Orders/V2__Create-new-order/NewOrder_V2';
 import { NewOrder_ProductPage } from '../Pages/Orders/V2__Create-new-order/NewOrder_ProductPage';
 import { NewOrder_Page_checkout } from '../Pages/Orders/V2__Create-new-order/NewOrder_Page_checkout';
 import { CheckItems_Page } from "../Pages/Orders/itemsToBuy/CheckItems_Page";
+import { SociosPage } from "../Pages/Socios/SociosPage";
 
 export const PrincipalRouter = () => {
 
@@ -79,6 +80,8 @@ export const PrincipalRouter = () => {
 
 
           <Route path="/resumen" element={<Resumen />} />
+
+          <Route path="/socios" element={<SociosPage />} />
 
         </Routes>
       </div>
