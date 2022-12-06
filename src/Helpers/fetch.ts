@@ -1,15 +1,8 @@
-import { StringLiteralLike } from "typescript";
 
 const baseUrl = process.env.REACT_APP_API_URL;
 
 
-
-
 type methods = 'GET' | 'POST' | 'PUT' | 'DELETE';
-
-
-
-
 
 
 export const fetchSinToken = (endpoint:string, data: any, method:methods = 'GET') => {
